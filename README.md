@@ -4,28 +4,18 @@ MCP server for TypeScript type resolution and dependency graph analysis. Uses [t
 
 ## Setup
 
+### 1. Clone and build
+
 ```bash
+git clone https://github.com/akshay-nm/mcp-server-ts-analysis.git
+cd mcp-server-ts-analysis
 npm install
 npm run build
 ```
 
-### Claude Code
+### 2. Add to Claude Code
 
-Add to `~/.claude.json` for global availability:
-
-```json
-{
-  "mcpServers": {
-    "ts-analysis": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["/path/to/mcp-server-ts-analysis/dist/bin/cli.js"]
-    }
-  }
-}
-```
-
-Or to a project's `.mcp.json`:
+**Global (all projects)** — add to `~/.claude.json`:
 
 ```json
 {
@@ -33,13 +23,33 @@ Or to a project's `.mcp.json`:
     "ts-analysis": {
       "type": "stdio",
       "command": "node",
-      "args": ["./node_modules/mcp-server-ts-analysis/dist/bin/cli.js"]
+      "args": ["/absolute/path/to/mcp-server-ts-analysis/dist/bin/cli.js"]
     }
   }
 }
 ```
 
-No startup config needed — all paths are passed per tool call.
+**Per project** — add to `.mcp.json` in the project root:
+
+```json
+{
+  "mcpServers": {
+    "ts-analysis": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["./path/to/mcp-server-ts-analysis/dist/bin/cli.js"]
+    }
+  }
+}
+```
+
+### 3. Restart Claude Code
+
+The server will appear in your MCP server list. No startup config needed — all paths (`tsconfig`, `source_root`, etc.) are passed per tool call, so one server instance works across all your projects.
+
+### Other MCP clients
+
+Any MCP client that supports stdio transport can use this server. Point it at `dist/bin/cli.js` with Node.js as the command.
 
 ## Tools
 
