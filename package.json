@@ -1,0 +1,26 @@
+{
+  "name": "mcp-server-ts-analysis",
+  "version": "1.0.0",
+  "description": "MCP server for TypeScript type resolution (ts-morph) and dependency graph analysis (madge). Resolve types at positions, get hover info, run diagnostics, trace import chains, detect circular deps — all via stdio.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-server-ts-analysis": "dist/bin/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/bin/cli.js",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["mcp", "typescript", "type-analysis", "dependency-graph", "ts-morph", "madge", "claude-code", "model-context-protocol"],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "madge": "^8.0.0",
+    "ts-morph": "^25.0.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}
